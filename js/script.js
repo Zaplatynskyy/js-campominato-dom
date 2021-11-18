@@ -14,38 +14,55 @@ play.addEventListener("click",
         container.innerHTML = '';
         
         let numBox = 0;
-        let classBox = '';
+        let classBox = 'box ';
 
+        // switch che determina il numero degli elementi che avrà il nostro campo e la classe assogiata agli elementi, in base alla difficoltà scelta
         switch(range) {
             case '1':
                 numBox = 100;
-                classBox = 'easy';
+                classBox += 'easy';
                 break;
 
             case '2':
                 numBox = 81;
-                classBox = 'hard';
+                classBox += 'hard';
                 break;
 
             case '3':
                 numBox = 49;
-                classBox = 'extreme';
+                classBox += 'extreme';
                 break;
         } 
 
+        // creo un array di bombe con 16 numeri casuali diversi tra loro
+        const arrayBomb = [];
+        while (arrayBomb.length < 16) {
+            const numBomb = randomNum(1, numBox);
+            if(!arrayBomb.includes(numBomb)) {
+                arrayBomb.push(numBomb);
+            }
+        }
+
+        console.log(arrayBomb)
+        // ciclo for per creare gli elementi all'interno del nostro DOM
         for(let i = 1; i <= numBox; i++) {
+            
             // assegno a newTag il valore della funzione
             const newTag = initNewElement(container, classBox, i);
-            // ad ogni tag aggiungo il comando click
+            // ad ogni tag aggiungo il comando click che si colora di rosso se il numero della casella è presente nell'array bomb, altrimenti di azzurro
             newTag.addEventListener("click", 
                 function() {
-                    this.classList.add('lightblue');
+                    if(arrayBomb.includes(i)) {
+                        findBomb(arrayBomb, numBox);
+                    } else {
+                        this.classList.add('lightblue');                        
+                    }
                 }
             );
         } 
-
     }
 );
+
 
 // *****FUNZIONI******
 
@@ -53,11 +70,25 @@ play.addEventListener("click",
 function initNewElement(containerTag, classTag, innerTag) {
     const newTag = document.createElement('div');
     const text = document.createTextNode(innerTag);
-    newTag.className = 'box';
-    newTag.classList.add(classTag);
+    newTag.className = classTag;
     newTag.appendChild(text);
     containerTag.appendChild(newTag);
 
     return newTag;
 }
 
+// funzione che mi restituisce un numero casuale tra num1 e num2
+function randomNum (num1, num2) {
+    return Math.floor(Math.random() * (num2 - num1 + 1) + num1);
+}
+
+// funzione che si attiva al click dell'elemento associato e colora tutte le bombe di rosso aggiungendo la classe boom
+function findBomb(array, numElementi) {
+    for(let i = 1; i <= numElementi; i++) {
+        if (array.includes(i)) {
+            const elemento = document.getElementsByClassName('box');
+            // messo i - 1 in quanto l'array elemento parte da 0 a 15 (che coincidono con gli elementi dell'array bombe)
+            elemento[i - 1].classList.add('boom');
+        }
+    }
+}

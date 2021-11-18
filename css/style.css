@@ -112,6 +112,10 @@ main {
     background-color: lightblue;
 }
 
+.box.boom {
+    background-color: red;
+}
+
 /* *****FOOTER***** */
 footer {
     height: 60px;
