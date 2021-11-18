@@ -53,20 +53,19 @@ play.addEventListener("click",
             
             // assegno a newTag il valore della funzione
             const newTag = initNewElement(container, classBox, i);
-
-            
-
             // ad ogni tag aggiungo il comando click che si colora di rosso se il numero della casella è presente nell'array bomb, altrimenti di azzurro
             newTag.addEventListener("click", 
                 function() {
+                    // se clicco su un cobbone contenente la bomba, si attivano tutte le bombe(funzione1) e compare un messazzio di fine partita(funzione 2)
                     if(arrayBomb.includes(i)) {
                         const endClass = 'end_text';
                         const textEndGame = `
-                            La partita è terminata. Numero tentativi riusciti :${contatore}
+                            La partita è terminata. Numero tentativi riusciti : ${contatore}
                         `;
                         findBomb(arrayBomb, numBox);
-                        initNewElement(container, endClass, textEndGame)
+                        initNewElement(container, endClass, textEndGame);
                     } else {
+                        // altrimenti se non è una cella bomba, aggiunge classe che colora la cella ed incremento il contatore dei tentativi riusciti
                         this.classList.add('lightblue'); 
                         contatore++;                       
                     }
@@ -100,8 +99,7 @@ function findBomb(array, numElementi) {
     for(let i = 1; i <= numElementi; i++) {
         if (array.includes(i)) {
             const elemento = document.getElementsByClassName('box');
-            // messo i - 1 in quanto l'array elemento parte da 0 a 15 (che coincidono con gli elementi dell'array bombe)
-            elemento[i - 1].classList.add('boom');
+            elemento[i - 1].classList.add('boom'); // messo i - 1 in quanto l'array elemento parte da 0 a 15 (che coincidono con gli elementi dell'array bombe)
         }
     }   
 }

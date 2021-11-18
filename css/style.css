@@ -27,6 +27,7 @@ header > .container {
     justify-content: space-between;
 }
 
+/* logo e titolo gioco */
 .logo {
     display: flex;
     align-items: center;
@@ -37,6 +38,7 @@ header > .container {
     margin: 0 15px;
 }
 
+/* livelli di difficoltà */
 .levels {
     display: flex;
     align-items: center;
@@ -50,6 +52,7 @@ header > .container {
     cursor: pointer;
 }
 
+/* bottone play */
 .btn {
     background-color: #e9e9ed;
     border: 1px solid gray;
@@ -72,6 +75,7 @@ main {
     padding: 5px 0;
 }
 
+/* container degli elementi del gioco */
 .container_box {
     width: 750px;
     height: 750px;
@@ -85,12 +89,13 @@ main {
     clear: both;
 }
 
+/* classe messaggio di inizio partita */
 .intro {
-    /* font-size: 38px; */
     text-align: center;
     line-height: 750px;
 }
 
+/* elementi inseriti dinamicamente */
 .box {
     border: 1px solid black;
     display: flex;
@@ -123,17 +128,18 @@ main {
     background-color: red;
 }
 
+/* classe messaggio di fine partita */
 .end_text {
     width: 100%;
+    height: 100%;
+    line-height: 750px;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
     color: white;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     padding: 20px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 /* *****FOOTER***** */
