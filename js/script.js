@@ -34,15 +34,10 @@ play.addEventListener("click",
         } 
 
         for(let i = 1; i <= numBox; i++) {
-            // creo il tag <div class="box extreme">i</div> e lo aggiungo al DOM
-            const div = document.createElement('div');
-            const text = document.createTextNode(i);
-            div.className = 'box';
-            div.classList.add(classBox);
-            div.appendChild(text);
-            container.appendChild(div);
+            // assegno a newTag il valore della funzione
+            const newTag = initNewElement(container, classBox, i);
             // ad ogni tag aggiungo il comando click
-            div.addEventListener("click", 
+            newTag.addEventListener("click", 
                 function() {
                     this.classList.add('lightblue');
                 }
@@ -54,5 +49,15 @@ play.addEventListener("click",
 
 // *****FUNZIONI******
 
+// funzione che crea un nuovo tag div, al quale passiamo il testo interno (innerTag), assegnamo una certa classe(classTag) ed infine lo inseriamo dentro ad un container (containerTag). Infine tale funzione restituisce l'elemento newTag
+function initNewElement(containerTag, classTag, innerTag) {
+    const newTag = document.createElement('div');
+    const text = document.createTextNode(innerTag);
+    newTag.className = 'box';
+    newTag.classList.add(classTag);
+    newTag.appendChild(text);
+    containerTag.appendChild(newTag);
 
+    return newTag;
+}
 
