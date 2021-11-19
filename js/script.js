@@ -14,6 +14,7 @@ play.addEventListener("click",
     function() {
         const range = document.getElementById('level').value;
         let container = document.querySelector('.container_box');
+        container.classList.remove('disable');
         // svuoto il container_box
         container.innerHTML = '';
         
@@ -62,7 +63,7 @@ play.addEventListener("click",
                         const textEndGame = `
                             La partita è terminata. Numero tentativi riusciti : ${contatore}
                         `;
-                        findBomb(arrayBomb, numBox);
+                        findBomb(arrayBomb, numBox, container);
                         initNewElement(container, endClass, textEndGame);
                     } else {
                         // altrimenti se non è una cella bomba, aggiunge classe che colora la cella ed incremento il contatore dei tentativi riusciti
@@ -95,11 +96,13 @@ function randomNum (num1, num2) {
 }
 
 // funzione che si attiva al click dell'elemento associato e colora tutte le bombe di rosso aggiungendo la classe boom
-function findBomb(array, numElementi) {
+function findBomb(array, numElementi, container) {
     for(let i = 1; i <= numElementi; i++) {
         if (array.includes(i)) {
             const elemento = document.getElementsByClassName('box');
             elemento[i - 1].classList.add('boom'); // messo i - 1 in quanto l'array elemento parte da 0 a 15 (che coincidono con gli elementi dell'array bombe)
         }
     }   
+
+    container.classList.add('disable');
 }
